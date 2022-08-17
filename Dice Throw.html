@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THROW-DICE</title>
+
+    <style>
+
+        body{
+            
+            background-image: url("https://wallpaperaccess.com/full/1492881.jpg");
+    background-size: 60%;
+    animation: gradient 10s ease infinite;
+        }
+        @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+      
+#winner{
+    text-align : center;
+    margin : 50px 0;
+    font-size : 60px;
+    color:rgb(83, 1, 59);
+    font-weight: bold;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000,
+            0 0 50px #84549b, 0 0 60px #9554b3, 0 0 70px #9554b3;
+    }
+
+    to {
+        text-shadow: 0 0 20px #eeeeee, 0 0 30px #f04dffd3, 0 0 40px #ff4da6, 0 0 50px #ff4da6,
+            0 0 60px #824dffb2
+    }
+}
+
+#cont{
+    width : 50%;
+    display : flex;
+    margin : auto;
+    justify-content : space-between;
+    align-items : center;
+    font-size : 30px;
+    text-align : center;
+
+}
+
+#cont #member-1 , #cont #member-2 , #cont #member-3{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display : flex;
+    width : 90px;
+    height : 90px;
+    margin : auto;
+    align-items : center;
+    justify-content : center;
+    margin-top : 60px;
+    border-radius : 10px;
+    font-size: 40px;
+    color: rgb(165, 162, 162);
+}
+
+.u{
+    animation: u .5s infinite linear;
+}
+
+@keyframes u {
+    0% {
+    transform: rotate(50deg);
+    }
+    50% {
+        transform: rotate(-10deg);
+        }
+    100% {
+     transform: rotate(50deg);
+     }
+}
+
+#roll{
+    display : block;
+    margin : auto;
+    margin-top : 150px;
+    height : 60px;
+    width : 20%;
+    border-radius : 40px;
+    background: rgb(28, 28, 233);
+    border : none;
+    font-size : 30px;
+    color : rgb(95, 93, 93);
+    cursor : pointer;
+
+}
+#roll:hover{
+background-color: rgb(224, 39, 6);
+}
+.c{
+    color: white;
+    font-size: 40px;
+}
+        </style>
+</head>
+<body>
+      <div id = "winner"> Winners</div>
+      <div id = "cont">
+    <div id = "memberA">
+          <div class="c">Member A</div>
+          <div id = "member-1">1</div>
+    </div>
+
+    <div id = "memberB">
+        <div class="c">Member B</div>
+        <div id = "member-2">2</div>
+  </div>
+
+  <div id = "memberC">
+    <div class="c">Member C</div>
+    <div id = "member-3">3</div>
+</div>
+</div>
+
+   <button id = "roll">Roll The Dice!</button>
+</body>
+
+   <script>
+
+       document.getElementById("roll").addEventListener("click", function()
+       {
+
+document.getElementById("member-1").setAttribute("class" , "u")
+document.getElementById("member-2").setAttribute("class" , "u")
+document.getElementById("member-3").setAttribute("class" , "u")
+
+setTimeout(function(){ 
+    document.getElementById("member-1").removeAttribute("class","u")
+    document.getElementById("member-2").removeAttribute("class", "u")
+    document.getElementById("member-3").removeAttribute( "class","u")
+
+
+ var num1 = Math.floor(Math.random()*6) + 1;
+ var num2 = Math.floor(Math.random()*6) + 1;
+ var num3 = Math.floor(Math.random()*6) + 1;
+
+ var obj = [
+         ["r1" ,num1 ],
+
+         ["r2",num2],
+
+         ["r3" , num3 ]
+ ]
+
+ document.getElementById("member-1").textContent = num1;
+ document.getElementById("member-2").textContent = num2;
+ document.getElementById("member-3").textContent = num3;
+
+ obj.sort(function(a , b)
+ {
+      return b[1] - a[1];
+ })
+
+ console.log(obj);
+    
+
+
+
+ if(obj[0][0] == "r1")
+ {
+    document.getElementById("member-1").style.background = "green";
+    document.getElementById("winner").innerText = "Winner is Member A"
+    
+}else if(obj[0][0] == "r2")
+{
+    document.getElementById("member-2").style.background = "green";
+    document.getElementById("winner").innerText = "Winner is Member B"
+}else{
+    document.getElementById("member-3").style.background = "green";
+    document.getElementById("winner").innerText = "Winner is Member C"
+}
+
+if(obj[1][0] == "r1")
+{
+    document.getElementById("member-1").style.background = "yellow";
+    
+}else if(obj[1][0] == "r2")
+{
+    document.getElementById("member-2").style.background = "yellow";
+}else{
+    document.getElementById("member-3").style.background = "yellow";
+}
+
+if(obj[2][0] == "r1")
+{
+    document.getElementById("member-1").style.background = "red";
+    
+}else if(obj[2][0] == "r2")
+{
+    document.getElementById("member-2").style.background = "red";
+}else
+{
+    document.getElementById("member-3").style.background = "red";
+}
+
+if(num1 == num2 && num1 == num3)
+{
+
+    document.getElementById("member-1").style.background = "blue";
+    document.getElementById("member-2").style.background = "blue";
+    document.getElementById("member-3").style.background = "blue";
+    document.getElementById("winner").innerText = "Its Draw"
+      
+}
+
+if(num1 == num2)
+{
+
+    document.getElementById("member-1").style.background = "blue";
+    document.getElementById("member-2").style.background = "blue";
+    if(obj[0][0] == "r1"){  
+        document.getElementById("winner").innerText = "Its Draw"
+       }
+  
+      
+}
+
+if(num1 == num3)
+{
+
+    document.getElementById("member-1").style.background = "blue";
+    document.getElementById("member-3").style.background = "blue";
+    if(obj[0][0] == "r1"){  
+     document.getElementById("winner").innerText = "Its Draw"
+    }
+      
+}
+
+if(num2 == num3)
+{
+
+    document.getElementById("member-2").style.background = "blue";
+    document.getElementById("member-3").style.background = "blue";
+    if(obj[0][0] == "r2"){  
+    document.getElementById("winner").innerText = "Its Draw";
+    }
+      
+}
+
+} , 1000)
+
+})
+   </script>
+</html>
